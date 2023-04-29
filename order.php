@@ -1,5 +1,9 @@
-
-<?php include('partials-front/menu.php'); ?>
+<?php
+    include('functions.php');
+    include('partials-front/menu.php');
+    //$_SESSION['login-order'] = "<div class='error'>Please Login or Signup to Order Food.</div>";
+    $user_data = check_login($conn);
+?>
 
     <?php 
         //CHeck whether food id is set or not
@@ -74,7 +78,7 @@
                         <h3><?php echo $title; ?></h3>
                         <input type="hidden" name="food" value="<?php echo $title; ?>">
 
-                        <p class="food-price">$<?php echo $price; ?></p>
+                        <p class="food-price">Ksh.<?php echo $price; ?></p>
                         <input type="hidden" name="price" value="<?php echo $price; ?>">
 
                         <div class="order-label">Quantity</div>
@@ -87,10 +91,10 @@
                 <fieldset>
                     <legend>Delivery Details</legend>
                     <div class="order-label">Full Name</div>
-                    <input type="text" name="full-name" placeholder="E.g. Vijay Thapa" class="input-responsive" required>
+                    <input type="text" name="full-name" placeholder="Enter full name" class="input-responsive" required>
 
                     <div class="order-label">Phone Number</div>
-                    <input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
+                    <input type="tel" name="contact" placeholder="E.g. 2547xxxxxx" maxlength="12" class="input-responsive" required>
 
                     <div class="order-label">Email</div>
                     <input type="email" name="email" placeholder="E.g. hi@vijaythapa.com" class="input-responsive" required>
@@ -151,7 +155,7 @@
                     {
                         //Query Executed and Order Saved
                         $_SESSION['order'] = "<div class='success text-center'>Food Ordered Successfully.</div>";
-                        header('location:'.SITEURL);
+                        header('location:'.SITEURL.'daraja/index.php');
                     }
                     else
                     {

@@ -28,7 +28,11 @@
             <br><br>
 
             <!-- Login Form Starts HEre -->
-            <form action="" method="POST" class="text-center">
+            <div>
+
+            </div>
+            
+            <form action="" name="form" method="POST" class="text-center" onsubmit="return isvalid()">
             Username: <br>
             <input type="text" name="username" placeholder="Enter Username"><br><br>
 
@@ -40,9 +44,27 @@
             </form>
             <!-- Login Form Ends HEre -->
 
-            <p class="text-center">Created By - <a href="www.vijaythapa.com">Vijay Thapa</a></p>
+            <p class="text-center">Created By - <a href="#">George Omollo</a></p>
         </div>
-
+        <script>
+            function isvalid(){
+                var username = document.form.username.value;
+                var password = document.form.password.value;
+                if(username.length == '' && password.length==''){
+                    alert('Username and Password field is empty!!!');
+                    return false
+                } else{
+                    if(username.length == ''){
+                        alert('Username field is empty!!!');
+                        return false
+                    }
+                    if(password.length == ''){
+                        alert('Password field is empty!!!');
+                        return false
+                    } 
+                }
+            }
+        </script>
     </body>
 </html>
 
@@ -59,31 +81,44 @@
         
         $raw_password = md5($_POST['password']);
         $password = mysqli_real_escape_string($conn, $raw_password);
-
-        //2. SQL to check whether the user with username and password exists or not
-        $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
-
-        //3. Execute the Query
-        $res = mysqli_query($conn, $sql);
-
-        //4. COunt rows to check whether the user exists or not
-        $count = mysqli_num_rows($res);
-
-        if($count==1)
+        if(!empty($username) && !empty($password) && !is_numeric($username))
         {
-            //User AVailable and Login Success
-            $_SESSION['login'] = "<div class='success'>Login Successful.</div>";
-            $_SESSION['user'] = $username; //TO check whether the user is logged in or not and logout will unset it
+            //2. SQL to check whether the user with username and password exists or not
+            $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
 
-            //REdirect to HOme Page/Dashboard
-            header('location:'.SITEURL.'admin/');
+            //3. Execute the Query
+            $res = mysqli_query($conn, $sql);
+
+            //4. COunt rows to check whether the user exists or not
+            $count = mysqli_num_rows($res);
+
+            if($count==1)
+            {
+                //User AVailable and Login Success
+                $_SESSION['login'] = "<div class='success'>Login Successful.</div>";
+                $_SESSION['user'] = $username; //TO check whether the user is logged in or not and logout will unset it
+
+                //REdirect to HOme Page/Dashboard
+                header('location:'.SITEURL.'admin/');
+            }
+            else
+            {
+                //User not Available and Login FAil
+                //$_SESSION['login'] = "<div class='error text-center'>Username or Password did not match.</div>";
+                //REdirect to HOme Page/Dashboard
+                echo "<script>
+                    window.location.href = 'login.php';
+                    alert('Login failed. Invalid username or password')
+                </script>";
+                header('location:'.SITEURL.'admin/login.php');
+            }
         }
         else
         {
-            //User not Available and Login FAil
-            $_SESSION['login'] = "<div class='error text-center'>Username or Password did not match.</div>";
-            //REdirect to HOme Page/Dashboard
-            header('location:'.SITEURL.'admin/login.php');
+            echo "<script>
+                window.location.href = 'login.php';
+                alert('Login failed. Username cannot be numeric')
+            </script>";
         }
 
 

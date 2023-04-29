@@ -11,6 +11,7 @@
 
         </div>
     </section>
+    <br>
     <!-- fOOD sEARCH Section Ends Here -->
 
     <?php 
@@ -19,7 +20,12 @@
             echo $_SESSION['order'];
             unset($_SESSION['order']);
         }
-    ?>
+
+        if(isset($_SESSION['login'])){
+            echo $_SESSION['login'];
+            unset($_SESSION['login']);
+        }
+    ?><br>
 
     <!-- CAtegories Section Starts Here -->
     <section class="categories">
@@ -139,7 +145,7 @@
 
                         <div class="food-menu-desc">
                             <h4><?php echo $title; ?></h4>
-                            <p class="food-price">$<?php echo $price; ?></p>
+                            <p class="food-price">Ksh.<?php echo $price; ?></p>
                             <p class="food-detail">
                                 <?php echo $description; ?>
                             </p>

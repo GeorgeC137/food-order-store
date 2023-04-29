@@ -1,0 +1,57 @@
+.main{
+    background-color: blueviolet;
+}
+
+.form{
+    background-color: rgb(255, 255, 255);
+    width: 25%;
+    margin: 120px auto; /* Makes the form come inthe middle */
+    padding: 2%;
+    box-shadow: 10px 10px 5px rgb(82, 32, 67);
+    border-radius: 10px;
+}
+
+.btn{
+    color: white;
+    background-color: green;
+    padding: 2%;
+    font-size: medium;
+    border-radius: 10px;
+}
+.btn:hover{
+    background-color: #ff4757;
+}
+
+.sgnup{
+    color: blue;
+    font-weight: bold;
+}
+
+.sgnup:hover{
+    color: #ff4757;
+}
+
+.success{
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error{
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+h4{
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media screen and (max-width:700px) {
+    .form{
+        width: 65%;
+        padding: 40px;
+    }
+}

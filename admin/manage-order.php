@@ -12,6 +12,12 @@
                         echo $_SESSION['update'];
                         unset($_SESSION['update']);
                     }
+
+                    if(isset($_SESSION['delete']))
+                    {
+                        echo $_SESSION['delete'];
+                        unset($_SESSION['delete']);
+                    }
                 ?>
                 <br><br>
 
@@ -75,19 +81,19 @@
 
                                                 if($status=="Ordered")
                                                 {
-                                                    echo "<label>$status</label>";
+                                                    echo "<label><b>$status</b></label>";
                                                 }
                                                 elseif($status=="On Delivery")
                                                 {
-                                                    echo "<label style='color: orange;'>$status</label>";
+                                                    echo "<label style='color: orange;'><b>$status</b></label>";
                                                 }
                                                 elseif($status=="Delivered")
                                                 {
-                                                    echo "<label style='color: green;'>$status</label>";
+                                                    echo "<label style='color: green;'><b>$status</b></label>";
                                                 }
                                                 elseif($status=="Cancelled")
                                                 {
-                                                    echo "<label style='color: red;'>$status</label>";
+                                                    echo "<label style='color: red;'><b>$status</b></label>";
                                                 }
                                             ?>
                                         </td>
@@ -98,6 +104,7 @@
                                         <td><?php echo $customer_address; ?></td>
                                         <td>
                                             <a href="<?php echo SITEURL; ?>admin/update-order.php?id=<?php echo $id; ?>" class="btn-secondary">Update Order</a>
+                                            <a href="<?php echo SITEURL; ?>admin/delete-order.php?id=<?php echo $id; ?>" class="btn-danger">Delete Order</a>
                                         </td>
                                     </tr>
 
